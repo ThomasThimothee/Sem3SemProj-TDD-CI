@@ -11,17 +11,15 @@ package Spike;
  */
 public class HomeBooking {
     
-    private Integer id;
     private String userName;
     private String date;
 
-    public Integer getId() {
-        return id;
+    public HomeBooking(String userName, String date) {
+        this.userName = userName;
+        this.date = date;
     }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    
+    
 
     public String getUserName() {
         return userName;

@@ -26,8 +26,6 @@ public class Home {
         this.description = description;
         this.image = image;
     }
-    
-    
 
     public Address getAddress() {
         return address;
@@ -77,7 +75,7 @@ public class Home {
         this.homeBookings = homeBookings;
     }
 
-    private int calculateRating() {
+    public int calculateRating() {
         int sum = 0;
         int count = 0;
         for (Double value : ratings.values()) {

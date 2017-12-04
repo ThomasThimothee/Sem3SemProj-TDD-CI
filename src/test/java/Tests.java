@@ -6,12 +6,16 @@
 
 import Spike.Address;
 import Spike.Home;
+import Spike.HomeBooking;
 import Spike.Role;
 import Spike.User;
+import java.util.HashMap;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  *
@@ -48,12 +52,27 @@ public class Tests {
     @After
     public void tearDown() {
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
     
+    @Test
+    public void calculateAverageRatingTest() {
+        HashMap<String, Double> ratings = new HashMap();
+        ratings.put("Lovro", 5.0);
+        ratings.put("Mathias", 3.0);
+        ratings.put("Dimitri", 4.5);
+        ratings.put("Thomas", 0.7);
+        home1.setRatings(ratings);
+        int calculatedRating = home1.calculateRating();
+        assertEquals(3, calculatedRating);
+    }
     
+    @Test
+    public void addUserBookingTest() {
+        HomeBooking booking1 = new HomeBooking("Lovro", "03-12-2017");
+        HomeBooking booking2 = new HomeBooking("Lovro", "04-12-2017");
+        HomeBooking booking3 = new HomeBooking("Lovro", "05-12-2017");
+        home1.addBooking(booking1);
+        home1.addBooking(booking2);
+        home1.addBooking(booking3);
+        assertEquals(3, home1.getHomeBookings().size());
+    }
 }
