@@ -1,5 +1,7 @@
 package Spike;
 
+import Exceptions.WrongZipNumberFormatException;
+
 /**
  *
  * @author mathiasjepsen
@@ -10,9 +12,13 @@ public class Address {
     private String zip;
     private String street;
 
-    public Address(String city, String zip, String street) {
+    public Address(String city, String zip, String street) throws WrongZipNumberFormatException {
         this.city = city;
+        if(zip.matches(".*[a-z].*")) {
+            throw new WrongZipNumberFormatException();
+        }else {
         this.zip = zip;
+        }
         this.street = street;
     }
 

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import Exceptions.WrongPhoneNumberFormatException;
+import Exceptions.WrongZipNumberFormatException;
 import Spike.Address;
 import Spike.Home;
 import Spike.HomeBooking;
@@ -41,7 +43,7 @@ public class Tests {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws WrongPhoneNumberFormatException, WrongZipNumberFormatException {
         address1 = new Address("Holte", "2840", "Kongevejen 438");
         home1 = new Home(address1, "A lovely place", "image.png");
         adminRole = new Role("Admin");
@@ -66,7 +68,7 @@ public class Tests {
     }
     
     @Test
-    public void addUserBookingTest() {
+    public void addHomeBookingTest() {
         HomeBooking booking1 = new HomeBooking("Lovro", "03-12-2017");
         HomeBooking booking2 = new HomeBooking("Lovro", "04-12-2017");
         HomeBooking booking3 = new HomeBooking("Lovro", "05-12-2017");
@@ -75,4 +77,13 @@ public class Tests {
         home1.addBooking(booking3);
         assertEquals(3, home1.getHomeBookings().size());
     }
+    @Test(expected = WrongPhoneNumberFormatException.class)
+    public void WrongFormatPhoneTest() throws WrongPhoneNumberFormatException {
+      User userTest = new User("lovro", "1234", "Lovro", "Billyjessica", "blabla", "lovro@mail.com");
+    }
+    @Test(expected = WrongZipNumberFormatException.class) 
+    public void WrongFormatZipTest() throws WrongZipNumberFormatException {
+        Address addressTest = new Address("Copenhagen", "testing", "Gl. Amtsvej");
+    }
+    
 }

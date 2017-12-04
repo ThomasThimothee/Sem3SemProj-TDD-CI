@@ -1,5 +1,6 @@
 package Spike;
 
+import Exceptions.WrongPhoneNumberFormatException;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @author mathiasjepsen
  */
 public class User {
-    
+
     private String username;
     private String passwordHash;
     private String fName;
@@ -16,13 +17,17 @@ public class User {
     private String email;
     private List<Role> roles;
     private List<UserBooking> bookings;
-    
-    public User(String username, String passwordHash, String fName, String lName, String phone, String email) {
+
+    public User(String username, String passwordHash, String fName, String lName, String phone, String email) throws WrongPhoneNumberFormatException {
         this.username = username;
         this.passwordHash = passwordHash;
         this.fName = fName;
         this.lName = lName;
-        this.phone = phone;
+        if (phone.matches(".*[a-z].*")) {
+            throw new WrongPhoneNumberFormatException();
+        } else {
+            this.phone = phone;
+        }
         this.email = email;
     }
 
@@ -89,10 +94,5 @@ public class User {
     public void setBookings(List<UserBooking> bookings) {
         this.bookings = bookings;
     }
-    
-    
-    
-    
-    
-    
+
 }
