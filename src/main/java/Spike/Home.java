@@ -21,6 +21,14 @@ public class Home {
     private String image;
     private List<HomeBooking> homeBookings = new ArrayList();
 
+    public Home(Address address, String description, String image) {
+        this.address = address;
+        this.description = description;
+        this.image = image;
+    }
+    
+    
+
     public Address getAddress() {
         return address;
     }

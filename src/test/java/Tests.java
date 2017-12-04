@@ -4,18 +4,26 @@
  * and open the template in the editor.
  */
 
+import Spike.Address;
+import Spike.Home;
+import Spike.Role;
+import Spike.User;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author mathiasjepsen
  */
 public class Tests {
+    
+    Home home1;
+    Address address1;
+    Role adminRole;
+    Role userRole;
+    User user1;
     
     public Tests() {
     }
@@ -30,6 +38,11 @@ public class Tests {
     
     @Before
     public void setUp() {
+        address1 = new Address("Holte", "2840", "Kongevejen 438");
+        home1 = new Home(address1, "A lovely place", "image.png");
+        adminRole = new Role("Admin");
+        userRole = new Role("User");
+        user1 = new User("lovro", "1234", "Lovro", "Billyjessica", "432543534", "lovro@mail.com");
     }
     
     @After
@@ -41,4 +54,6 @@ public class Tests {
     //
     // @Test
     // public void hello() {}
+    
+    
 }
