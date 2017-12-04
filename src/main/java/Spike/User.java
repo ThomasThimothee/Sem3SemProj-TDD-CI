@@ -23,10 +23,10 @@ public class User {
         this.passwordHash = passwordHash;
         this.fName = fName;
         this.lName = lName;
-        if (phone.matches(".*[a-z].*")) {
-            throw new WrongPhoneNumberFormatException();
+        if (phone.matches("[0-9]+")) {
+           this.phone = phone;
         } else {
-            this.phone = phone;
+       throw new WrongPhoneNumberFormatException();
         }
         this.email = email;
     }

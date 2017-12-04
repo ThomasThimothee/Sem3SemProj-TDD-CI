@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Exceptions.WrongCityFormatException;
 import Exceptions.WrongPhoneNumberFormatException;
 import Exceptions.WrongZipNumberFormatException;
 import Spike.Address;
@@ -43,7 +44,7 @@ public class Tests {
     }
     
     @Before
-    public void setUp() throws WrongPhoneNumberFormatException, WrongZipNumberFormatException {
+    public void setUp() throws WrongPhoneNumberFormatException, WrongZipNumberFormatException, WrongCityFormatException {
         address1 = new Address("Holte", "2840", "Kongevejen 438");
         home1 = new Home(address1, "A lovely place", "image.png");
         adminRole = new Role("Admin");
@@ -81,9 +82,51 @@ public class Tests {
     public void WrongFormatPhoneTest() throws WrongPhoneNumberFormatException {
       User userTest = new User("lovro", "1234", "Lovro", "Billyjessica", "blabla", "lovro@mail.com");
     }
+     @Test(expected = WrongPhoneNumberFormatException.class)
+    public void WrongFormatPhoneTestEmptyString() throws WrongPhoneNumberFormatException {
+      User userTest = new User("lovro", "1234", "Lovro", "Billyjessica", "", "lovro@mail.com");
+    }
+     @Test(expected = WrongPhoneNumberFormatException.class)
+    public void WrongFormatPhoneTestNumberAndLetters() throws WrongPhoneNumberFormatException {
+      User userTest = new User("lovro", "1234", "Lovro", "Billyjessica", "123b456", "lovro@mail.com");
+    }
+     @Test(expected = WrongPhoneNumberFormatException.class)
+    public void WrongFormatPhoneTestSpecialCharacters() throws WrongPhoneNumberFormatException {
+      User userTest = new User("lovro", "1234", "Lovro", "Billyjessica", "123/456", "lovro@mail.com");
+    }
+     @Test(expected = WrongPhoneNumberFormatException.class)
+    public void WrongFormatPhoneTestSpace() throws WrongPhoneNumberFormatException {
+      User userTest = new User("lovro", "1234", "Lovro", "Billyjessica", " ", "lovro@mail.com");
+    }
+     @Test(expected = WrongPhoneNumberFormatException.class)
+    public void WrongFormatPhoneTestNumbersAndSpace() throws WrongPhoneNumberFormatException {
+      User userTest = new User("lovro", "1234", "Lovro", "Billyjessica", "678 989", "lovro@mail.com");
+    }
     @Test(expected = WrongZipNumberFormatException.class) 
-    public void WrongFormatZipTest() throws WrongZipNumberFormatException {
+    public void WrongFormatZipTest() throws WrongZipNumberFormatException, WrongCityFormatException {
         Address addressTest = new Address("Copenhagen", "testing", "Gl. Amtsvej");
     }
+    @Test(expected = WrongCityFormatException.class) 
+    public void WrongFormatCityTest() throws WrongCityFormatException, WrongZipNumberFormatException {
+    Address addresTest2 = new Address("471207", "1620", "Vestebrogade");
+    }
+     @Test(expected = WrongCityFormatException.class) 
+    public void WrongFormatCityTestEmptyString() throws WrongCityFormatException, WrongZipNumberFormatException {
+    Address addresTest2 = new Address("", "1620", "Vestebrogade");
+    }
+     @Test(expected = WrongCityFormatException.class) 
+    public void WrongFormatCityTestSpecialCharacter() throws WrongCityFormatException, WrongZipNumberFormatException {
+    Address addresTest2 = new Address("/*", "1620", "Vestebrogade");
+    }
+     @Test(expected = WrongCityFormatException.class) 
+    public void WrongFormatCityTestNumbersAndSpace() throws WrongCityFormatException, WrongZipNumberFormatException {
+    Address addresTest2 = new Address("471 97", "1620", "Vestebrogade");
+    }
+     @Test(expected = WrongCityFormatException.class) 
+    public void WrongFormatCityTestSpace() throws WrongCityFormatException, WrongZipNumberFormatException {
+    Address addresTest2 = new Address(" ", "1620", "Vestebrogade");
+    }
+    
+
     
 }
